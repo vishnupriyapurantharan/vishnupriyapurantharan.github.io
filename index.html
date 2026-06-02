@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vishnu Priya P — Edge AI & Agentic AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e0d;
+    --bg-soft:#111817;
+    --panel:#131b1a;
+    --ink:#e8efe9;
+    --ink-dim:#8fa39a;
+    --ink-faint:#5d6f67;
+    --signal:#4ade80;
+    --signal-deep:#22c55e;
+    --amber:#fbbf24;
+    --line:#1f2b28;
+    --line-bright:#2c3c38;
+    --maxw:1180px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Archivo',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* grain + grid atmosphere */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:64px 64px;
+    opacity:.35;
+    mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 80%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:2}
+
+  /* ============ NAV ============ */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    backdrop-filter:blur(12px);
+    background:rgba(10,14,13,.72);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-in{max-width:var(--maxw);margin:0 auto;padding:14px 28px;display:flex;justify-content:space-between;align-items:center}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.82rem;letter-spacing:.04em;color:var(--ink)}
+  .logo span{color:var(--signal)}
+  .nav-links{display:flex;gap:30px}
+  .nav-links a{
+    color:var(--ink-dim);text-decoration:none;font-size:.78rem;font-weight:500;
+    font-family:'JetBrains Mono',monospace;letter-spacing:.02em;transition:color .25s;position:relative;
+  }
+  .nav-links a:hover{color:var(--signal)}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--signal);transition:width .25s}
+  .nav-links a:hover::after{width:100%}
+  @media(max-width:720px){.nav-links{display:none}}
+
+  /* ============ HERO ============ */
+  header{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    padding:120px 0 80px;position:relative;
+  }
+  .status-row{
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:34px;
+    font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-dim);
+    letter-spacing:.06em;text-transform:uppercase;
+    opacity:0;animation:rise .8s .1s forwards;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--signal);box-shadow:0 0 12px var(--signal);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  h1{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(2.8rem,7vw,5.6rem);line-height:.98;letter-spacing:-.02em;
+    margin-bottom:8px;
+  }
+  h1 .l1{display:block;opacity:0;animation:rise .9s .2s forwards}
+  h1 .l2{display:block;color:var(--signal);font-style:italic;opacity:0;animation:rise .9s .34s forwards}
+  .role{
+    font-family:'JetBrains Mono',monospace;font-size:clamp(.85rem,1.6vw,1.05rem);
+    color:var(--ink-dim);margin-top:26px;letter-spacing:.02em;max-width:620px;
+    opacity:0;animation:rise .9s .5s forwards;
+  }
+  .role b{color:var(--ink);font-weight:600}
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:14px;margin-top:44px;
+    opacity:0;animation:rise .9s .66s forwards;
+  }
+  .chip{
+    font-family:'JetBrains Mono',monospace;font-size:.74rem;letter-spacing:.02em;
+    padding:8px 14px;border:1px solid var(--line-bright);border-radius:2px;
+    color:var(--ink-dim);background:var(--bg-soft);transition:all .25s;
+  }
+  .chip:hover{border-color:var(--signal);color:var(--signal);transform:translateY(-2px)}
+  .hero-cta{display:flex;gap:16px;margin-top:46px;flex-wrap:wrap;opacity:0;animation:rise .9s .8s forwards}
+  .btn{
+    font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;letter-spacing:.03em;
+    padding:13px 26px;border-radius:2px;text-decoration:none;transition:all .25s;display:inline-flex;align-items:center;gap:9px;
+  }
+  .btn-primary{background:var(--signal);color:#05140c}
+  .btn-primary:hover{background:var(--signal-deep);transform:translateY(-2px);box-shadow:0 10px 30px -10px var(--signal)}
+  .btn-ghost{border:1px solid var(--line-bright);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--signal);color:var(--signal);transform:translateY(-2px)}
+  .scroll-hint{
+    position:absolute;bottom:34px;left:28px;font-family:'JetBrains Mono',monospace;
+    font-size:.68rem;color:var(--ink-faint);letter-spacing:.1em;text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;opacity:0;animation:rise .9s 1s forwards;
+  }
+  .scroll-hint .bar{width:34px;height:1px;background:var(--ink-faint);position:relative;overflow:hidden}
+  .scroll-hint .bar::after{content:"";position:absolute;left:-34px;top:0;width:34px;height:1px;background:var(--signal);animation:scan 2.2s infinite}
+  @keyframes scan{to{left:34px}}
+
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ============ SECTION SCAFFOLD ============ */
+  section{padding:100px 0;position:relative}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:54px}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--signal);font-weight:600}
+  .sec-title{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.6vw,2.7rem);font-weight:600;letter-spacing:-.01em}
+  .sec-line{flex:1;height:1px;background:var(--line);align-self:center}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+  .reveal.in{opacity:1;transform:translateY(0)}
+
+  /* ============ ABOUT ============ */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:60px}
+  @media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:40px}}
+  .lead{font-family:'Fraunces',serif;font-size:clamp(1.3rem,2.4vw,1.7rem);line-height:1.45;font-weight:400;color:var(--ink)}
+  .lead em{color:var(--signal);font-style:italic}
+  .about-body p{color:var(--ink-dim);margin-top:20px;font-size:1.02rem}
+  .about-body p b{color:var(--ink);font-weight:600}
+  .stat-stack{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+  .stat{padding:22px 24px;border-bottom:1px solid var(--line);transition:background .25s}
+  .stat:last-child{border-bottom:none}
+  .stat:hover{background:var(--bg-soft)}
+  .stat .n{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:600;color:var(--signal);line-height:1}
+  .stat .l{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-dim);letter-spacing:.04em;margin-top:8px;text-transform:uppercase}
+
+  /* ============ EXPERIENCE / TIMELINE ============ */
+  .timeline{position:relative;padding-left:34px}
+  .timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:1px;background:var(--line-bright)}
+  .tl-item{position:relative;padding-bottom:48px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{
+    content:"";position:absolute;left:-31px;top:6px;width:13px;height:13px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--signal);box-shadow:0 0 0 4px var(--bg)}
+  .tl-item.muted::before{border-color:var(--ink-faint)}
+  .tl-date{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--signal);letter-spacing:.04em;text-transform:uppercase}
+  .tl-item.muted .tl-date{color:var(--ink-faint)}
+  .tl-role{font-family:'Archivo',sans-serif;font-size:1.18rem;font-weight:700;margin-top:6px;color:var(--ink)}
+  .tl-org{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--ink-dim);margin-top:2px}
+  .tl-desc{color:var(--ink-dim);margin-top:12px;font-size:.97rem;max-width:680px}
+  .tl-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:4px 10px;border:1px solid var(--line);border-radius:2px;color:var(--ink-faint)}
+
+  /* ============ PROJECTS ============ */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  @media(max-width:820px){.proj-grid{grid-template-columns:1fr}}
+  .card{
+    border:1px solid var(--line);border-radius:4px;padding:30px;background:var(--panel);
+    transition:transform .3s,border-color .3s;position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--signal),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+  .card:hover{transform:translateY(-5px);border-color:var(--line-bright)}
+  .card:hover::before{transform:scaleX(1)}
+  .card.feature{grid-column:1/-1;background:linear-gradient(135deg,var(--panel),var(--bg-soft))}
+  .card-tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--amber);letter-spacing:.06em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px}
+  .card-tag .badge{padding:3px 8px;border:1px solid var(--amber);border-radius:2px;color:var(--amber)}
+  .card h3{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:600;margin-top:14px;line-height:1.15;letter-spacing:-.01em}
+  .card p{color:var(--ink-dim);margin-top:12px;font-size:.95rem}
+  .card .metrics{display:flex;gap:24px;margin-top:18px;flex-wrap:wrap}
+  .metric .mv{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--signal)}
+  .metric .ml{font-size:.7rem;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+  .card .stack{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+  .card .stack span{font-family:'JetBrains Mono',monospace;font-size:.67rem;padding:4px 9px;background:var(--bg);border:1px solid var(--line);border-radius:2px;color:var(--ink-dim)}
+
+  /* ============ SKILLS ============ */
+  .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  @media(max-width:820px){.skill-grid{grid-template-columns:1fr}}
+  .skill-cell{background:var(--bg);padding:26px;transition:background .25s}
+  .skill-cell:hover{background:var(--panel)}
+  .skill-cell h4{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--signal);letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .skill-cell h4 .idx{color:var(--ink-faint)}
+  .skill-cell ul{list-style:none}
+  .skill-cell li{color:var(--ink-dim);font-size:.9rem;padding:5px 0;border-bottom:1px dashed var(--line);display:flex;align-items:center;gap:9px}
+  .skill-cell li:last-child{border-bottom:none}
+  .skill-cell li::before{content:"▹";color:var(--signal);font-size:.7rem}
+
+  /* ============ RECOGNITION ============ */
+  .rec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(max-width:820px){.rec-grid{grid-template-columns:1fr}}
+  .rec{display:flex;gap:18px;padding:24px;border:1px solid var(--line);border-radius:4px;background:var(--panel);transition:border-color .25s}
+  .rec:hover{border-color:var(--signal)}
+  .rec .ic{font-family:'JetBrains Mono',monospace;font-size:1.5rem;color:var(--signal);font-weight:700;line-height:1;flex-shrink:0}
+  .rec h4{font-size:1.05rem;font-weight:700;color:var(--ink);line-height:1.25}
+  .rec p{color:var(--ink-dim);font-size:.88rem;margin-top:6px}
+  .rec .src{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--ink-faint);margin-top:8px;letter-spacing:.03em}
+
+  /* ============ CONTACT ============ */
+  .contact{text-align:center;padding:120px 0}
+  .contact .pre{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--signal);letter-spacing:.1em;text-transform:uppercase}
+  .contact h2{font-family:'Fraunces',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:600;margin-top:18px;letter-spacing:-.02em;line-height:1.05}
+  .contact h2 em{font-style:italic;color:var(--signal)}
+  .contact-links{display:flex;justify-content:center;gap:16px;margin-top:40px;flex-wrap:wrap}
+
+  footer{border-top:1px solid var(--line);padding:30px 0}
+  .foot-in{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .foot-in p{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-faint);letter-spacing:.02em}
+  .foot-in .sig{color:var(--ink-dim)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="logo">VP<span>//</span>edge.ai</div>
+    <div class="nav-links">
+      <a href="#about">about</a>
+      <a href="#experience">experience</a>
+      <a href="#work">work</a>
+      <a href="#stack">stack</a>
+      <a href="#recognition">recognition</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header>
+    <div class="status-row"><span class="dot"></span>Available for Edge AI &amp; Agentic AI roles · Bengaluru, India</div>
+    <h1>
+      <span class="l1">Vishnu Priya P</span>
+      <span class="l2">engineering intelligence at the edge.</span>
+    </h1>
+    <p class="role">
+      Engineer building at the intersection of <b>embedded systems</b> and <b>applied AI</b> — from firmware on bare metal to <b>multi-agent LLM systems</b> in production. M.Tech in AI &amp; ML, holder of a published patent in edge anomaly detection.
+    </p>
+    <div class="hero-meta">
+      <span class="chip">Edge AI / TinyML</span>
+      <span class="chip">Agentic AI · RAG</span>
+      <span class="chip">Embedded · RTOS</span>
+      <span class="chip">Patent Holder</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Get in touch →</a>
+      <a href="#work" class="btn btn-ghost">View selected work</a>
+    </div>
+    <div class="scroll-hint"><span class="bar"></span>scroll to explore</div>
+  </header>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">01</span>
+      <span class="sec-title">Profile</span>
+      <span class="sec-line"></span>
+    </div>
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <p class="lead">I turn <em>constrained hardware</em> and <em>large models</em> into systems that actually ship — and hold up in production.</p>
+        <p>My foundation is ~3 years in <b>embedded firmware</b> at L&amp;T Technology Services — drivers, RTOS, industrial communication protocols on real silicon. That grounding in resource-constrained, real-time systems is exactly what makes my move into AI distinctive.</p>
+        <p>Today I build <b>Agentic AI</b> systems at LTIMindtree: multi-agent orchestration, retrieval-augmented generation, and on-device intelligence. I pair an <b>M.Tech in AI &amp; ML</b> (VIT Vellore, CGPA 8.72) with a <b>published patent</b> and peer-reviewed research — proof that I take ideas from prototype to defensible, deployed work.</p>
+      </div>
+      <div class="stat-stack reveal">
+        <div class="stat"><div class="n">3+</div><div class="l">Years engineering experience</div></div>
+        <div class="stat"><div class="n">1</div><div class="l">Published patent (edge AI)</div></div>
+        <div class="stat"><div class="n">8.72</div><div class="l">M.Tech AI/ML · CGPA / 10</div></div>
+        <div class="stat"><div class="n">2</div><div class="l">Peer-reviewed publications</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">02</span>
+      <span class="sec-title">Experience</span>
+      <span class="sec-line"></span>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-date">Jan 2026 — Present</div>
+        <div class="tl-role">Agentic AI Engineer</div>
+        <div class="tl-org">LTIMindtree (LTM) · Bengaluru</div>
+        <p class="tl-desc">Building production-grade multi-agent AI systems: supervisor–domain agent architectures with intelligent query routing, citation-grounded responses, RAG pipelines, and MCP tool integration. Deploying conversational AI with voice and avatars on Azure, frontend to backend.</p>
+        <div class="tl-tags">
+          <span class="tag">Azure AI Foundry</span><span class="tag">Microsoft AutoGen</span><span class="tag">RAG</span><span class="tag">MCP</span><span class="tag">ChromaDB</span><span class="tag">Angular / React</span>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-date">Oct 2021 — Jun 2024</div>
+        <div class="tl-role">Firmware Engineer (Embedded Systems)</div>
+        <div class="tl-org">L&amp;T Technology Services (LTTS) · Mysore</div>
+        <p class="tl-desc">Developed embedded drivers and communication protocols on Nordic nRF Connect SDK with Zephyr RTOS for industrial applications. Built multithreaded real-time systems, Python/Node-RED GUIs for thermal imaging, and MSP430 firmware with UART/I2C/LoRa.</p>
+        <div class="tl-tags">
+          <span class="tag">nRF Connect SDK</span><span class="tag">Zephyr RTOS</span><span class="tag">Embedded C</span><span class="tag">MSP430</span><span class="tag">LoRa</span>
+        </div>
+      </div>
+      <div class="tl-item reveal muted">
+        <div class="tl-date">2024 — 2026</div>
+        <div class="tl-role">M.Tech · Computer Science (AI &amp; ML)</div>
+        <div class="tl-org">Vellore Institute of Technology (VIT) · CGPA 8.72/10</div>
+        <p class="tl-desc">Specialized in Edge Computing, Deep Learning &amp; GenAI, Large Language Models, and Distributed Data Processing — the academic backbone behind the patent and production AI work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">03</span>
+      <span class="sec-title">Selected Work</span>
+      <span class="sec-line"></span>
+    </div>
+    <div class="proj-grid">
+
+      <div class="card feature reveal">
+        <span class="card-tag"><span class="badge">PATENT · PUBLISHED</span> App. No. 202641018162</span>
+        <h3>Edge-Based Anomaly Detection for Chemical Plant Sensors</h3>
+        <p>A low-cost edge system running a quantized Isolation Forest entirely on a Raspberry Pi — fusing gas, temperature, humidity, force, and light sensors to detect industrial hazards on-device, with zero cloud dependency, privacy by design, and full offline resilience. Published by the Indian Patent Office, Feb 2026.</p>
+        <div class="metrics">
+          <div class="metric"><div class="mv">&lt;2 ms</div><div class="ml">Model inference</div></div>
+          <div class="metric"><div class="mv">&lt;100 ms</div><div class="ml">End-to-end latency</div></div>
+          <div class="metric"><div class="mv">97.5%</div><div class="ml">Accuracy</div></div>
+          <div class="metric"><div class="mv">~4.7 W</div><div class="ml">Power draw</div></div>
+        </div>
+        <div class="stack">
+          <span>Isolation Forest</span><span>TensorFlow Lite</span><span>Raspberry Pi</span><span>Multi-sensor fusion</span><span>Streamlit</span><span>SQLite</span>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <span class="card-tag">Agentic AI · Production</span>
+        <h3>Multi-Agent RAG System</h3>
+        <p>Supervisor–worker agent architecture on Azure AI Foundry and LTM BlueVerse with intelligent routing, document ingestion, vectorization, citation-grounded Q&amp;A, and MCP tool integration.</p>
+        <div class="stack"><span>Azure AI Foundry</span><span>RAG</span><span>MCP</span><span>Copilot Studio</span></div>
+      </div>
+
+      <div class="card reveal">
+        <span class="card-tag">Real-time AI · XAI</span>
+        <h3>AutoGen Risk-Detection Pipeline</h3>
+        <p>Real-time AutoGen-based system integrating cached MQTT streaming, risk detection, explainable AI, automated decision workflows, and a ChromaDB-powered RAG pipeline with OCR.</p>
+        <div class="stack"><span>Microsoft AutoGen</span><span>MQTT</span><span>ChromaDB</span><span>OCR</span></div>
+      </div>
+
+      <div class="card reveal">
+        <span class="card-tag">LLM / NLP</span>
+        <h3>Secure LLM Sentiment Platform</h3>
+        <p>BERT + LoRA fine-tuned sentiment analysis web app with a Streamlit interface and Keycloak role-based access control — efficient parameter tuning on a privacy-aware stack.</p>
+        <div class="stack"><span>BERT</span><span>LoRA / PEFT</span><span>Keycloak</span><span>Streamlit</span></div>
+      </div>
+
+      <div class="card reveal">
+        <span class="card-tag">Data Engineering</span>
+        <h3>OCR + Sentiment Data Pipeline</h3>
+        <p>Distributed pipeline with PySpark processing, Kafka-driven data transfer, PostgreSQL storage, and Keycloak RBAC — built for throughput and traceability.</p>
+        <div class="stack"><span>PySpark</span><span>Kafka</span><span>PostgreSQL</span><span>OCR</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">04</span>
+      <span class="sec-title">Technical Stack</span>
+      <span class="sec-line"></span>
+    </div>
+    <div class="skill-grid reveal">
+      <div class="skill-cell">
+        <h4><span class="idx">[01]</span> Agentic AI &amp; GenAI</h4>
+        <ul><li>Multi-agent systems</li><li>RAG pipelines</li><li>MCP tool integration</li><li>Microsoft AutoGen</li><li>Azure AI Foundry</li><li>Copilot Studio</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h4><span class="idx">[02]</span> LLMs &amp; NLP</h4>
+        <ul><li>BERT · Transformers</li><li>LoRA / PEFT</li><li>Hugging Face</li><li>Prompt engineering</li><li>ChromaDB · vector search</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h4><span class="idx">[03]</span> Edge AI / TinyML</h4>
+        <ul><li>Model quantization</li><li>On-device inference</li><li>Isolation Forest</li><li>Multi-sensor fusion</li><li>Raspberry Pi</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h4><span class="idx">[04]</span> Machine &amp; Deep Learning</h4>
+        <ul><li>CNN · RNN · LSTM · BiLSTM</li><li>GAN · object detection</li><li>PyTorch · scikit-learn</li><li>pandas · NumPy</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h4><span class="idx">[05]</span> Embedded Systems</h4>
+        <ul><li>nRF Connect SDK</li><li>Zephyr RTOS</li><li>MSP430 · Arduino · ESP8266</li><li>UART / I2C / LoRa</li><li>Embedded C</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h4><span class="idx">[06]</span> Data &amp; Backend</h4>
+        <ul><li>PySpark · Kafka</li><li>PostgreSQL · SQL Server</li><li>Docker · Flask · REST</li><li>Angular · .NET (C#)</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECOGNITION -->
+<section id="recognition">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">05</span>
+      <span class="sec-title">Recognition &amp; Research</span>
+      <span class="sec-line"></span>
+    </div>
+    <div class="rec-grid">
+      <div class="rec reveal">
+        <div class="ic">⊹</div>
+        <div>
+          <h4>Indian Patent — Published</h4>
+          <p>"Edge-Based Anomaly Detection System for Chemical Plant Sensors Using Isolation Forest Machine Learning." Awaiting examination.</p>
+          <div class="src">App. No. 202641018162 · Feb 2026</div>
+        </div>
+      </div>
+      <div class="rec reveal">
+        <div class="ic">◈</div>
+        <div>
+          <h4>Wiley Online Library — Journal</h4>
+          <p>"Eye-Based Cursor Control and Eye-Coding using Image Processing and CNN."</p>
+          <div class="src">Peer-reviewed · 2023</div>
+        </div>
+      </div>
+      <div class="rec reveal">
+        <div class="ic">◭</div>
+        <div>
+          <h4>International Conference (ICRTST)</h4>
+          <p>Presented "Robotic Arm for Swab Sample Collection," later published as a white paper at L&amp;T Technology Services.</p>
+          <div class="src">Conference paper · 2021</div>
+        </div>
+      </div>
+      <div class="rec reveal">
+        <div class="ic">✦</div>
+        <div>
+          <h4>Smart India Hackathon 2020</h4>
+          <p>Qualified for the national hackathon — Portable Generalised Tonic-Clonic Seizure Alert Device.</p>
+          <div class="src">National qualifier · 2020</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="pre reveal">// let's build something</div>
+    <h2 class="reveal">Open to <em>Edge AI</em> &amp;<br>Agentic AI opportunities.</h2>
+    <div class="contact-links reveal">
+      <a href="mailto:vishnupvspriya@gmail.com" class="btn btn-primary">vishnupvspriya@gmail.com</a>
+      <a href="#" class="btn btn-ghost" data-link="linkedin">LinkedIn ↗</a>
+      <a href="#" class="btn btn-ghost" data-link="github">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <p class="sig">Vishnu Priya P — Edge AI &amp; Agentic AI Engineer</p>
+    <p>Bengaluru, India · +91 63609 41163</p>
+    <p>© 2026 · Designed &amp; built with intent</p>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transitionDelay=(i%4*0.06)+'s';
+    io.observe(el);
+  });
+
+  // nav active state on scroll
+  const sections=[...document.querySelectorAll('section[id]')];
+  const navlinks=[...document.querySelectorAll('.nav-links a')];
+  window.addEventListener('scroll',()=>{
+    let cur='';
+    sections.forEach(s=>{if(scrollY>=s.offsetTop-120)cur=s.id});
+    navlinks.forEach(a=>a.style.color=a.getAttribute('href')==='#'+cur?'var(--signal)':'');
+  });
+</script>
+</body>
+</html>
